@@ -1,0 +1,9 @@
+{
+  "name": "ai-haigui-game",
+  "private": true,
+  "scripts": {
+    "dev:web": "npm --prefix web run dev",
+    "dev:backend": "npm --prefix backend start",
+    "start:backend": "npm --prefix backend start"
+  }
+}

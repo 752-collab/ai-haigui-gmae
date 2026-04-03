@@ -1,0 +1,162 @@
+@import 'tailwindcss';
+
+/* 全局基础样式 */
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  overflow-x: hidden;
+}
+
+#root {
+  overflow-x: hidden;
+}
+
+/* Result 页：汤底揭晓渐入 */
+@keyframes soup-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(1.25rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-soup-reveal {
+  animation: soup-reveal 1.15s ease-out forwards;
+}
+
+/* Game 页：轻提示入场 */
+@keyframes notice-in {
+  from {
+    opacity: 0;
+    transform: translateY(0.5rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-notice-in {
+  animation: notice-in 0.35s ease-out forwards;
+}
+
+/* 路由切换 / 区块入场：轻量衰减，避免卡顿 */
+@keyframes page-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-page-fade-in {
+  animation: page-fade-in 0.35s ease-out forwards;
+}
+
+/* 消息气泡 */
+@keyframes bubble-in {
+  from {
+    opacity: 0;
+    transform: translateY(0.35rem) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.animate-bubble-in {
+  animation: bubble-in 0.32s ease-out both;
+}
+
+/* 按钮按下 */
+@keyframes btn-press {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.97);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.active-press:active {
+  animation: btn-press 0.22s ease-out;
+}
+
+/* 结果列表项依次出现（延迟由 style 传入） */
+@keyframes history-item-in {
+  from {
+    opacity: 0;
+    transform: translateX(-0.25rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-history-item {
+  animation: history-item-in 0.4s ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-soup-reveal,
+  .animate-notice-in,
+  .animate-page-fade-in,
+  .animate-bubble-in,
+  .animate-history-item,
+  .active-press:active {
+    animation: none !important;
+  }
+
+  .animate-soup-reveal,
+  .animate-notice-in,
+  .animate-page-fade-in,
+  .animate-bubble-in,
+  .animate-history-item {
+    opacity: 1;
+    transform: none;
+  }
+
+  .animate-spin {
+    animation: none !important;
+  }
+}
+
+div[role='log'][aria-label='对话记录'] {
+  scrollbar-width: thin;
+  scrollbar-color: rgb(71 85 105 / 0.65) rgb(15 23 42 / 0.92);
+}
+
+div[role='log'][aria-label='对话记录']::-webkit-scrollbar {
+  width: 8px;
+}
+
+div[role='log'][aria-label='对话记录']::-webkit-scrollbar-track {
+  background: rgb(15 23 42 / 0.92);
+}
+
+div[role='log'][aria-label='对话记录']::-webkit-scrollbar-thumb {
+  background: rgb(71 85 105 / 0.65);
+  border-radius: 4px;
+}
+
+div[role='log'][aria-label='对话记录']::-webkit-scrollbar-thumb:hover {
+  background: rgb(100 116 139 / 0.75);
+}
+
+div[role='log'][aria-label='对话记录']::-webkit-scrollbar-button {
+  display: none;
+}

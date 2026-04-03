@@ -1,0 +1,9 @@
+# 本地密钥与环境（切勿提交）
+.env
+.env.local
+.env.*.local
+backend/.env
+
+# 依赖与构建产物
+node_modules/
+web/dist/
