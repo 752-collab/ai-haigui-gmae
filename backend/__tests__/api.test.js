@@ -20,6 +20,18 @@ describe("GET /api/capabilities", () => {
     expect(res.body.post).toEqual(
       expect.arrayContaining(["/api/chat", "/api/manual-hint", "/api/hint"]),
     );
+    expect(res.body.get).toEqual(
+      expect.arrayContaining(["/api/manual-hint"]),
+    );
+  });
+});
+
+describe("GET /api/manual-hint", () => {
+  it("returns success and static hint", async () => {
+    const res = await request(app).get("/api/manual-hint").expect(200);
+    expect(res.body.success).toBe(true);
+    expect(typeof res.body.hint).toBe("string");
+    expect(res.body.hint.length).toBeGreaterThan(0);
   });
 });
 

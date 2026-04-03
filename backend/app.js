@@ -24,6 +24,10 @@ const PROXIMITY_ENUM = new Set([
 const JUDGE_FALLBACK_REASK_HINT =
   "本次模型回答格式不规范，已按「无关」处理且不记入缓存。请改用更短的是非问句（如「是不是……」「有没有……」）重新提问。";
 
+/** GET /api/manual-hint：无题目上下文时的通用玩法提示（不指向任何具体汤底） */
+const STATIC_MANUAL_HINT_TEXT =
+  "优先用「是不是」「有没有」这类可判真假的是非问句；抓住汤面里反常或矛盾的一处，追问原因、信息与认知是否一致；先理清人物关系与时间线，再逐步缩小到关键动机。";
+
 /**
  * 仅接受严格 JSON：字段仅限 answer / proximityFeedback；answer 必须是 是|否|无关；
  * proximityFeedback 只能为空或两条固定文案。用于模型输出校验，失败则走兜底。
@@ -278,11 +282,18 @@ app.get("/api/test", (req, res) => {
   });
 });
 
+app.get("/api/manual-hint", (req, res) => {
+  res.json({
+    success: true,
+    hint: STATIC_MANUAL_HINT_TEXT,
+  });
+});
+
 app.get("/api/capabilities", (req, res) => {
   res.json({
     ok: true,
     post: ["/api/chat", "/api/manual-hint", "/api/hint"],
-    get: ["/", "/api/test", "/api/capabilities"],
+    get: ["/", "/api/test", "/api/capabilities", "/api/manual-hint"],
   });
 });
 
